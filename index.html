@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>naver-render</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: sans-serif; margin: 0; padding: 12px; background: #f4f4f4; }
+  #panel { background: #fff; border: 1px solid #ddd; padding: 12px; margin-bottom: 12px; }
+  #src { width: 100%; height: 120px; font-family: monospace; font-size: 12px; }
+  button { font-size: 16px; padding: 10px 24px; margin: 8px 8px 0 0; cursor: pointer; }
+  #go { background: #03c75a; color: #fff; border: none; }
+  #sel { background: #fff; border: 1px solid #999; }
+  #out { background: #fff; border: 2px dashed #03c75a; padding: 16px; min-height: 200px; }
+  #hint { color: #888; font-size: 13px; margin: 0 0 8px 0; }
+</style>
+</head>
+<body>
+<div id="panel">
+  <p id="hint">1) 아래 박스에 HTML을 붙여넣고 2) [Render] 클릭, 3) [Select All] 클릭 후 Ctrl+C</p>
+  <textarea id="src" placeholder="여기에 HTML 붙여넣기"></textarea><br>
+  <button id="go">Render</button>
+  <button id="sel">Select All</button>
+</div>
+<div id="out"></div>
+<script>
+document.getElementById('go').onclick = function() {
+  document.getElementById('out').innerHTML = document.getElementById('src').value;
+};
+document.getElementById('sel').onclick = function() {
+  var r = document.createRange();
+  r.selectNodeContents(document.getElementById('out'));
+  var s = window.getSelection();
+  s.removeAllRanges();
+  s.addRange(r);
+};
+</script>
+</body>
+</html>
